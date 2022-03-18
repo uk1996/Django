@@ -1,4 +1,3 @@
-from distutils import extension
 from django.db import models
 import os
 from uuid import uuid4
@@ -33,5 +32,4 @@ class Post(models.Model):
     def message_length(self): 
         return len(self.message)
     message_length.short_description = '메세지 글자수'
-
-
+ 
