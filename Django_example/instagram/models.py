@@ -25,6 +25,10 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='생성시간')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='수정시간')
 
+    # default sort
+    class Meta:
+        ordering = ['-id']
+
     def __str__(self):
         #return f"Custom Post object ({self.id})"
         return self.message
