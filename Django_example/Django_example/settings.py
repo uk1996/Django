@@ -41,12 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third apps
     'django_extensions',
+    'debug_toolbar',
     # local apps
     'blog1',
     'instagram',
     ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -128,6 +130,8 @@ STATIC_URL = 'static/'
 
 MEDIA_URL = '/media/' # URL을 통해 파일에 접근할때
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 파일을 저장할때
+
+INTERNAL_IPS = ["127.0.0.1"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
