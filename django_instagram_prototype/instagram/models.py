@@ -21,6 +21,7 @@ class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='instagram_post_set') # reverse_name을 포기하려면 related_name='+'
     photo = models.ImageField(blank=True, upload_to=uuid_name_upload_to)
     message = models.TextField()
+    tag_set = models.ManyToManyField('Tag', blank=True) # ManyToManyField(to, blank)
     is_public = models.BooleanField(default=False, verbose_name='공개여부')
     created_at = models.DateTimeField(auto_now_add=True) # 생성시간
     updated_at = models.DateField(auto_now=True) # 수정시간
@@ -44,3 +45,11 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-id']
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    # post_set = models.ManyToManyField(Post, blank=True)
+
+    def __str__(self):
+        return self.name
