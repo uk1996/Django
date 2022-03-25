@@ -34,7 +34,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     # models.ForeignKey 주석
-    # to는 문자열로드 지정 가능 ex> 'instagram.Post'
+    # to는 문자열로도 지정 가능 ex> 'instagram.Post'
     # on_delete: Record 삭제 시 Rule
     # on_delete=models.CASCADE: FK로 참조하하는 다른 모델의 Record들도 삭제 ex> 하나의 Post가 삭제되면 거기에 속하는 모든 Comment삭제
     post = models.ForeignKey(Post, on_delete=models.CASCADE, # post_id 필드가 생성(id는 Post Model의 pk), post는 가상의 필드
