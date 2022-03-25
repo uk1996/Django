@@ -2,6 +2,7 @@ from django.db import models
 import os
 from django.utils import timezone
 from uuid import uuid4
+from django.conf import settings
 
 def uuid_name_upload_to(instance, filename):
     app_label = instance.__class__._meta.app_label # 앱 별로
@@ -17,14 +18,26 @@ def uuid_name_upload_to(instance, filename):
     ])
 
 class Post(models.Model):
-    message = models.TextField()
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='instagram_post_set') # reverse_name을 포기하려면 related_name='+'
     photo = models.ImageField(blank=True, upload_to=uuid_name_upload_to)
+    message = models.TextField()
     is_public = models.BooleanField(default=False, verbose_name='공개여부')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True) # 생성시간
+    updated_at = models.DateField(auto_now=True) # 수정시간
 
     class Meta:
         ordering  = ['-id']
 
     def __str__(self):
-        return self.message 
+        return self.message
+
+class Comment(models.Model):
+    # models.ForeignKey 주석
+    # to는 문자열로드 지정 가능 ex> 'instagram.Post'
+    # on_delete: Record 삭제 시 Rule
+    # on_delete=models.CASCADE: FK로 참조하하는 다른 모델의 Record들도 삭제 ex> 하나의 Post가 삭제되면 거기에 속하는 모든 Comment삭제
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, # post_id 필드가 생성(id는 Post Model의 pk), post는 가상의 필드
+                                    limit_choices_to={'is_public':True}) 
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
