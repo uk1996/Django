@@ -18,7 +18,8 @@ def uuid_name_upload_to(instance, filename):
     ])
 
 class Post(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='instagram_post_set') # reverse_name을 포기하려면 related_name='+'
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, 
+    related_name='instagram_post_set') # reverse_name을 포기하려면 related_name='+'
     photo = models.ImageField(blank=True, upload_to=uuid_name_upload_to)
     message = models.TextField()
     tag_set = models.ManyToManyField('Tag', blank=True) # ManyToManyField(to, blank)
@@ -38,7 +39,7 @@ class Comment(models.Model):
     # on_delete: Record 삭제 시 Rule
     # on_delete=models.CASCADE: FK로 참조하하는 다른 모델의 Record들도 삭제 ex> 하나의 Post가 삭제되면 거기에 속하는 모든 Comment삭제
     post = models.ForeignKey(Post, on_delete=models.CASCADE, # post_id 필드가 생성(id는 Post Model의 pk), post는 가상의 필드
-                                    limit_choices_to={'is_public':True}) 
+                                    limit_choices_to={'is_public':True})
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

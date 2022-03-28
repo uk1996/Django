@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render # 템플릿 응답을 위한 shortcut 함수
 from .models import Post
 
 def post_list(request):
@@ -10,3 +11,6 @@ def post_list(request):
         'post_list':qs,
         'q':q,
     })
+
+def post_detail(requset, pk):
+    pass
