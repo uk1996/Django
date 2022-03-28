@@ -2,7 +2,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render # 템플릿 응답을 위한 shortcut 함수
 from .models import Post
 
-def post_list(request):
+def post_list(request:HttpRequest):
     qs = Post.objects.all()
     q = request.GET.get('q', '')
     if q:
@@ -12,5 +12,5 @@ def post_list(request):
         'q':q,
     })
 
-def post_detail(requset, pk):
+def post_detail(requset:HttpRequest, pk) -> HttpResponse:
     pass
