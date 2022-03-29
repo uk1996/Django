@@ -14,3 +14,6 @@ def post_list(request:HttpRequest):
 
 def post_detail(requset:HttpRequest, pk) -> HttpResponse:
     pass
+
+def archives_year(request, year):
+    return HttpResponse(f"{year}년 archives")
