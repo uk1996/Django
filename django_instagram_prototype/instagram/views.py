@@ -1,6 +1,7 @@
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render # 템플릿 응답을 위한 shortcut 함수
+from django.http import HttpRequest, HttpResponse, Http404
+from django.shortcuts import render, get_object_or_404 # 템플릿 응답을 위한 shortcut 함수
 from .models import Post
+from django.views.generic import DetailView
 
 def post_list(request:HttpRequest):
     qs = Post.objects.all()
@@ -12,8 +13,16 @@ def post_list(request:HttpRequest):
         'q':q,
     })
 
-def post_detail(requset:HttpRequest, pk) -> HttpResponse:
-    return HttpResponse('post_detail 호출')
+def post_detail(requset:HttpRequest, pk) -> HttpResponse: 
+    # try:
+    #     post = Post.objects.get(pk=pk)
+    # except Post.DoesNotExist:
+    #     raise Http404
+    post = get_object_or_404(Post, pk=pk)
+    return render(requset, 'instagram/post_detail.html', {
+        'post':post
+    })
+# post_detail = DetailView.as_view(model=Post, pk_url_kwarg='pk')
 
-def archives_year(request, year):
+def archives_year(request:HttpRequest, year) -> HttpResponse:
     return HttpResponse(f"{year}년 archives")
