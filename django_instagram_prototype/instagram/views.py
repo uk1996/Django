@@ -13,7 +13,7 @@ def post_list(request:HttpRequest):
     })
 
 def post_detail(requset:HttpRequest, pk) -> HttpResponse:
-    pass
+    return HttpResponse('post_detail 호출')
 
 def archives_year(request, year):
     return HttpResponse(f"{year}년 archives")
