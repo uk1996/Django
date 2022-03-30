@@ -14,10 +14,11 @@ class YearConverter_2000:
               return str(value)
 
 register_converter(YearConverter_2000, 'year_2000')
-
+ 
 
 urlpatterns = [
        path('', views.post_list, name='post_list'),
        path('<int:pk>/', views.post_detail),
-       path('archives/<year_2000:year>/', views.archives_year), # re_path(r"archives/(?P<year>20\d{2})/", views.archives_year)
+       #path('archives/<year_2000:year>/', views.archives_year), # re_path(r"archives/(?P<year>20\d{2})/", views.archives_year)
+       path('archive/', views.post_archive, name='post_archive'),
 ]

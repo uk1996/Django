@@ -1,7 +1,7 @@
 from django.http import HttpRequest, HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404 # 템플릿 응답을 위한 shortcut 함수
 from .models import Post
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ArchiveIndexView
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 
@@ -34,5 +34,7 @@ def post_detail(requset:HttpRequest, pk) -> HttpResponse:
     })
 # post_detail = DetailView.as_view(model=Post, pk_url_kwarg='pk')
 
-def archives_year(request:HttpRequest, year) -> HttpResponse:
-    return HttpResponse(f"{year}년 archives")
+# def archives_year(request:HttpRequest, year) -> HttpResponse:
+#     return HttpResponse(f"{year}년 archives")
+
+post_archive = ArchiveIndexView.as_view(model=Post, date_field='created_at', paginate_by=10)
