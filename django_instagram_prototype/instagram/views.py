@@ -18,7 +18,11 @@ def post_detail(requset:HttpRequest, pk) -> HttpResponse:
     #     post = Post.objects.get(pk=pk)
     # except Post.DoesNotExist:
     #     raise Http404
-    post = get_object_or_404(Post, pk=pk)
+    if not requset.user.is_authenticated:
+        post = get_object_or_404(Post, pk=pk, is_public=True)
+    else:
+        post = get_object_or_404(Post, pk=pk)
+
     return render(requset, 'instagram/post_detail.html', {
         'post':post
     })
