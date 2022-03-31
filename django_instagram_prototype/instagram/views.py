@@ -1,7 +1,7 @@
 from django.http import HttpRequest, HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404 # 템플릿 응답을 위한 shortcut 함수
 from .models import Post
-from django.views.generic import DetailView, ArchiveIndexView, ListView
+from django.views.generic import DetailView, ArchiveIndexView, ListView, YearArchiveView
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -18,7 +18,7 @@ from django.utils.decorators import method_decorator
 #     return render(request, 'instagram/post_list.html', {
 #         'post_list':page_obj,
 #         'q':q,
-#     })
+#     })#
 
 @method_decorator(login_required, name='dispatch')
 class PostListView(ListView):
@@ -46,3 +46,5 @@ def post_detail(requset:HttpRequest, pk) -> HttpResponse:
 #     return HttpResponse(f"{year}년 archives")
 
 post_archive = ArchiveIndexView.as_view(model=Post, date_field='created_at', paginate_by=10)
+
+post_archive_year = YearArchiveView.as_view(model=Post, date_field='created_at', make_object_list=True)

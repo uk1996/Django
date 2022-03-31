@@ -4,4 +4,6 @@
 
 <h2>date_list</h2>
 
-{{ date_list }}
+{% for date in date_list %}
+    {{ date.year }}
+{% endfor %}
