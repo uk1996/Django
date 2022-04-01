@@ -57,4 +57,4 @@ class Tag(models.Model):
     # post_set = models.ManyToManyField(Post, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.name  
