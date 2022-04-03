@@ -1,2 +1,2 @@
 # Django
-Django practice
+Django practice(instagram_prototype)
