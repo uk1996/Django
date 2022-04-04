@@ -143,9 +143,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'static/' # url을 통한 요청이 올때
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'django_instagram_prototype', 'static')
+]
 
-MEDIA_URL = '/media/' # 파일을 url을 통해 접근할때
+MEDIA_URL = '/media/' # url을 통한 요청이 올때
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # 파일을 저장할때
 
 INTERNAL_IPS = ['127.0.0.1']
