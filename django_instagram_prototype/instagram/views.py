@@ -13,7 +13,7 @@ def post_new(request):
     if request.method =='POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            post = form.save()
+            post = form.save(commit=True) # DB에 모델 객체 저장
             return redirect(post)
     else:
         form = PostForm()
