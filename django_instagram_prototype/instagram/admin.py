@@ -9,6 +9,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display_links = ['message']
     list_filter = ['created_at', 'is_public']
     search_fields = ['message']
+    
 
     def message_length(self, post):
         return len(post.message)

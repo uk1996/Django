@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils import timezone
 from uuid import uuid4
 from django.conf import settings
+from django.core.validators import MinLengthValidator
 
 def uuid_name_upload_to(instance, filename):
     app_label = instance.__class__._meta.app_label # 앱 별로
@@ -18,11 +19,12 @@ def uuid_name_upload_to(instance, filename):
         uuid_name + extension,
     ])
 
+
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, 
     related_name='instagram_post_set') # reverse_name을 포기하려면 related_name='+'
     photo = models.ImageField(blank=True, upload_to=uuid_name_upload_to)
-    message = models.TextField()
+    message = models.TextField(validators=[MinLengthValidator(10)])
     tag_set = models.ManyToManyField('Tag', blank=True) # ManyToManyField(to, blank)
     is_public = models.BooleanField(default=False, verbose_name='공개여부')
     created_at = models.DateTimeField(auto_now_add=True) # 생성시간

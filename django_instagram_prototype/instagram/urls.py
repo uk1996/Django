@@ -9,6 +9,7 @@ register_converter(MonthConverter, 'month')
 register_converter(DayConverter, 'day')
  
 urlpatterns = [
+       path('new/', views.post_new, name='post_new'),
        path('', views.post_list, name='post_list'),
        path('<int:pk>/', views.post_detail, name='post_detail'),
        #path('archives/<year_2000:year>/', views.archives_year), # re_path(r"archives/(?P<year>20\d{2})/", views.archives_year)
