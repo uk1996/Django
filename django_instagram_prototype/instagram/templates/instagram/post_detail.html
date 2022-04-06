@@ -16,10 +16,14 @@
     {{ post.message|linebreaks }}
     <hr/>
     <a href=" {% url 'instagram:post_list' %}" class="btn btn-primary">
-        목록
+        <span style="color: white;">목록</span>
     </a>
-    <a href=" {% url 'instagram:post_edit' post.pk %}" class="btn btn-primary">
-        수정
+    <a href=" {% url 'instagram:post_edit' post.pk %}" class="btn btn-info">
+        <span style="color: white;">수정</span>
+    </a>
+
+    <a href=" {% url 'instagram:post_delete' post.pk %}" class="btn btn-danger">
+        <span style="color: white;">삭제</span>
     </a>
 {% endblock content %}
 
