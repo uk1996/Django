@@ -13,7 +13,7 @@ from django.contrib import messages
 def post_new(request):
     if request.method =='POST':
         form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
+        if form.is_valid(): # 유효성 검사 수행
             post = form.save(commit=False)
             post.author = request.user # 현재 로그인 유저 Instance
             post.save()
