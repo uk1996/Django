@@ -32,6 +32,7 @@ class Post(models.Model):
 
     class Meta:
         ordering  = ['-id']
+        # unique_together = [( , ),]
 
     def __str__(self):
         return self.message
