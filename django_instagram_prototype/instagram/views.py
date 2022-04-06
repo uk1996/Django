@@ -20,8 +20,9 @@ def post_new(request):
             return redirect(post)
     else:
         form = PostForm()
-        return render(request, 'instagram/post_form.html', {
-        'form':form,
+    
+    return render(request, 'instagram/post_form.html', {
+        'form':form
     })
 
 @login_required
