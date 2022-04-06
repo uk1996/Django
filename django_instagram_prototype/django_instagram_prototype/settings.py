@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 import os
 from django.core.exceptions import ImproperlyConfigured
+from django.contrib.messages import constants as message_constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -153,6 +154,11 @@ MEDIA_URL = '/media/' # url을 통한 요청이 올때
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # 파일을 저장할때
 
 INTERNAL_IPS = ['127.0.0.1']
+
+MESSAGE_TAGS = {
+    message_constants.DEBUG:'secondary',
+    message_constants.ERROR:'danger',
+}
 
 
 

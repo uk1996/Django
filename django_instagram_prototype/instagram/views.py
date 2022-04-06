@@ -17,12 +17,14 @@ def post_new(request):
             post = form.save(commit=False)
             post.author = request.user # 현재 로그인 유저 Instance
             post.save()
+            messages.success(request, '포스팅을 저장했습니다.')
             return redirect(post)
     else:
         form = PostForm()
     
     return render(request, 'instagram/post_form.html', {
-        'form':form
+        'form':form,
+        'post':None,
     })
 
 @login_required
@@ -38,12 +40,14 @@ def post_edit(request, pk):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save(commit=True) # DB에 모델 객체 저장
+            messages.success(request, '포스팅을 수정했습니다.')
             return redirect(post)
     else:
         form = PostForm(instance=post)
     
     return render(request, 'instagram/post_form.html', {
     'form':form,
+    'post':post,
     })
 
 # @login_required
