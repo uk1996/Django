@@ -3,5 +3,5 @@ from django.conf import settings
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    address = models.CharField(max_length=100) # 주소
-    zipcode = models.CharField(max_length=6) # 우편 번호
+    address = models.CharField(max_length=100, blank=True) # 주소
+    zipcode = models.CharField(max_length=6, blank=True) # 우편 번호
